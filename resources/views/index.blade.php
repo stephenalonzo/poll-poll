@@ -6,12 +6,12 @@
                 <p class="mb-4">
                     Complete the fields below to create your poll.
                 </p>
-                <form action="" method="post" class="space-y-4">
+                <form action="/poll/create" method="post" class="space-y-4">
                     @csrf
                     <div class="w-96 text-start">
-                        <label class="label-text" for="labelAndHelperText">Title</label>
-                        <input type="text" placeholder="Type your question here" class="input"
-                            id="labelAndHelperText" />
+                        <label class="label-text" for="question">Title</label>
+                        <input type="text" name="poll_question" placeholder="Type your question here" class="input"
+                            id="question" />
                     </div>
                     <div class="space-y-2">
                         <p class="label-text text-start" for="content-remove-for-copy-target">Answer
@@ -20,7 +20,7 @@
                             <div class="text-start">
                                 <div id="content-remove-for-copy-target" class="text-start flex items-end space-x-4">
                                     <input type="text" placeholder="Type option here" class="input"
-                                        name="option[]" />
+                                        name="poll_option[]" />
                                     <button class="btn btn-square btn-outline btn-error" aria-label="delete button"
                                         data-copy-markup-delete-item>
                                         <span class="icon-[tabler--x]"></span>
@@ -47,12 +47,12 @@
                     <div class="flex items-center justify-between gap-1">
                         <label class="label-text text-base" for="multipleOptions">Allow selection of multiple
                             options</label>
-                        <input type="checkbox" name="multipleOptions" value="1" class="switch switch-primary"
+                        <input type="checkbox" name="poll_multipleOptions" value="1" class="switch switch-primary"
                             id="multipleOptions" />
                     </div>
                     <div class="flex items-center justify-between gap-1">
                         <label class="label-text text-base" for="resultsVisiblity">Public results</label>
-                        <input type="checkbox" name="resultsVisiblity" value="1" class="switch switch-primary"
+                        <input type="checkbox" name="poll_resultsVisiblity" value="1" class="switch switch-primary"
                             id="resultsVisiblity" />
                     </div>
                     <hr class="opacity-25">

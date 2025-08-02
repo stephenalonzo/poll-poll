@@ -11,7 +11,7 @@ class PollRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,10 @@ class PollRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'poll_question' => 'required',
+            'poll_option' => ['required', 'array'],
+            'poll_multipleOptions' => 'nullable',
+            'poll_resultsVisiblity' => 'nullable',
         ];
     }
 }

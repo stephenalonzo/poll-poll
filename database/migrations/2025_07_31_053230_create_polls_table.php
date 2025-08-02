@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('polls', function (Blueprint $table) {
             $table->id();
+            $table->string('poll_uid');
+            $table->string('poll_question');
+            $table->string('poll_option');
+            $table->string('poll_multipleOptions')->nullable();
+            $table->string('poll_resultsVisibility')->nullable();
             $table->timestamps();
         });
     }
