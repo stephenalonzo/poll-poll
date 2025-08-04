@@ -5,17 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Result extends Model
+class PollResult extends Model
 {
     use HasFactory;
 
+    public $table = 'poll_result';
+    public $timestamps = false;
     protected $fillable = [
         'poll_id',
-        'option'
+        'result_id'
     ];
-
-    public function polls()
-    {
-        return $this->belongsToMany(Poll::class);
-    }
 }

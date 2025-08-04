@@ -19,4 +19,9 @@ class Poll extends Model
     protected $casts = [
         'poll_option' => 'array'
     ];
+
+    public function results()
+    {
+        return $this->belongsToMany(Result::class);
+    }
 }

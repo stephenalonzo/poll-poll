@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PollRequest;
 use App\Http\Requests\ResultRequest;
 use App\Models\Poll;
+use App\Models\PollResult;
 use App\Models\Result;
 use Illuminate\Http\Request;
 
@@ -37,11 +38,38 @@ class PollController extends Controller
         $validated = $request->validated();
 
         foreach ($poll_id as $id) {
-            Result::create([
+            $result = Result::create([
                 'poll_id' => $id['id'],
                 'option' => $validated['option']
             ]);
+
+            PollResult::create([
+                'poll_id' => $poll->id,
+                'result_id' => $result->id
+            ]);
             return back();
         }
+    }
+
+    public function results(Poll $poll)
+    {
+        $result = Result::where('poll_id', $poll->id)->get();
+        $totalVotes = $result->count();
+        $optionCounts = [];
+        foreach ($poll->poll_option as $option) {
+            $count = $result->where('option', $option)->count();
+            $percentage = $totalVotes > 0 ? round(($count / $totalVotes) * 100, 2) : 0;
+            $optionCounts[] = [
+                'option' => $option,
+                'count' => $count,
+                'percentage' => $percentage
+            ];
+        }
+
+        return view('poll.results', [
+            'poll' => $poll,
+            'optionCounts' => $optionCounts,
+            'totalVotes' => $totalVotes
+        ]);
     }
 }

@@ -6,35 +6,18 @@
                 <p class="mb-4">
                     by Author
                 </p>
-                <form action="/poll/{{ $poll->poll_uid }}/vote" method="post" class="space-y-4">
-                    @csrf
-                    @if ($poll->poll_multipleOptions == 1)
-                        @foreach ($poll->poll_option as $option)
-                            <div class="flex items-center gap-1">
-                                <input type="checkbox" class="checkbox" name="option[]" value="{{ $option }}"
-                                    id="option_{{ str_replace(' ', '', $option) }}" />
-                                <label class="label-text text-base"
-                                    for="option_{{ str_replace(' ', '', $option) }}">{{ $option }}</label>
-                            </div>
-                        @endforeach
-                    @else
-                        @foreach ($poll->poll_option as $option)
-                            <div class="flex items-center gap-1">
-                                <input type="radio" class="radio radio-primary" name="option"
-                                    value="{{ $option }}" id="option_{{ str_replace(' ', '', $option) }}" />
-                                <label class="label-text text-base"
-                                    for="option_{{ str_replace(' ', '', $option) }}">{{ $option }}</label>
-                            </div>
-                        @endforeach
-                    @endif
-                    <div class="flex flex-col items-end space-y-3">
-                        <button type="submit" class="w-full btn btn-primary">
-                            Submit Vote
-                        </button>
-                        <a href="/poll/{{ $poll->poll_uid }}/results" class="text-sm font-medium text-primary">View
-                            Results</a>
-                    </div>
-                </form>
+                <div class="w-full space-y-4">
+                    @foreach ($optionCounts as $data)
+                        <div class="mb-1 flex items-end justify-between">
+                            <p class="text-base-content font-medium">{{ $data['option'] }}</p>
+                            <span class="text-base-content font-light">{{ $data['percentage'] . '%' }}</span>
+                        </div>
+                        <div class="progress" role="progressbar" aria-label="75% Progressbar" aria-valuenow="15"
+                            aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress-bar w-[calc(100%)]"></div>
+                        </div>
+                    @endforeach
+                </div>
             </div>
         </div>
     </section>
