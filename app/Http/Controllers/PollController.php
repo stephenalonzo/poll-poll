@@ -43,10 +43,6 @@ class PollController extends Controller
                 'option' => $validated['option']
             ]);
 
-            PollResult::create([
-                'poll_id' => $poll->id,
-                'result_id' => $result->id
-            ]);
             return back();
         }
     }

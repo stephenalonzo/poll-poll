@@ -23,6 +23,11 @@
     </section>
     <section class="p-6">
         <div class="mx-auto flex items-center justify-center">
+            <div id="chart"></div>
+        </div>
+    </section>
+    <section class="p-6">
+        <div class="mx-auto flex items-center justify-center">
             <div class="text-start space-y-4">
                 <h3 class="font-bold text-xl">Share</h3>
                 <div class="space-y-2">
@@ -57,5 +62,34 @@
                 </div>
             </div>
         </div>
+        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+        <script>
+            let chartLabels = @json(collect($optionCounts)->pluck('option'));
+            let chartSeries = @json(collect($optionCounts)->pluck('count'));
+
+            var options = {
+                series: chartSeries,
+                chart: {
+                    type: 'pie',
+                    height: 350
+                },
+                colors: ['#794dff', '#76717f', '#3b82f6'],
+                labels: chartLabels,
+                responsive: [{
+                    breakpoint: 768,
+                    options: {
+                        chart: {
+                            width: 375
+                        },
+                        legend: {
+                            position: 'right'
+                        }
+                    }
+                }]
+            };
+
+            var chart = new ApexCharts(document.querySelector("#chart"), options);
+            chart.render();
+        </script>
     </section>
 </x-layout>

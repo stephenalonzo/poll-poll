@@ -8,6 +8,7 @@
     <title>Poll Poll</title>
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 </head>
 
 <body>
