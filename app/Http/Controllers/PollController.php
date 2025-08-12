@@ -30,6 +30,8 @@ class PollController extends Controller
         // dd($validated);
         $validated['poll_uid'] = bin2hex(random_bytes(4));
         Poll::create($validated);
+
+        return redirect('/poll/' . $validated['poll_uid']);
     }
 
     public function vote(ResultRequest $request, Poll $poll)

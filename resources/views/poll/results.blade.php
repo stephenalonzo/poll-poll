@@ -62,7 +62,6 @@
                 </div>
             </div>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
         <script>
             let chartLabels = @json(collect($optionCounts)->pluck('option'));
             let chartSeries = @json(collect($optionCounts)->pluck('count'));
