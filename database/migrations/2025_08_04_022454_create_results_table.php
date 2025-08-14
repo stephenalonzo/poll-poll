@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('poll_id');
             $table->foreign('poll_id')->references('id')->on('polls')->onDelete('cascade');
             $table->string('option');
+            $table->longText('voter_ip');
             $table->timestamps();
         });
     }

@@ -38,36 +38,42 @@ class PollController extends Controller
     {
         $poll_id = Poll::where('poll_uid', $poll['poll_uid'])->get('id');
         $validated = $request->validated();
+        $validated['voter_ip'] = $request->ip();
 
         foreach ($poll_id as $id) {
-            $result = Result::create([
-                'poll_id' => $id['id'],
-                'option' => $validated['option']
-            ]);
-
+            foreach ($validated['option'] as $option) {
+                Result::create([
+                    'poll_id' => $id['id'],
+                    'option' => $option,
+                    'voter_ip' => $validated['voter_ip']
+                ]);
+            }
             return back();
         }
     }
 
     public function results(Poll $poll)
     {
-        $result = Result::where('poll_id', $poll->id)->get();
-        $totalVotes = $result->count();
-        $optionCounts = [];
-        foreach ($poll->poll_option as $option) {
-            $count = $result->where('option', $option)->count();
-            $percentage = $totalVotes > 0 ? round(($count / $totalVotes) * 100, 2) : 0;
-            $optionCounts[] = [
-                'option' => $option,
-                'count' => $count,
-                'percentage' => $percentage
-            ];
+        if ($poll->poll_resultsVisibility == 1) {
+            $result = Result::where('poll_id', $poll->id)->get();
+            $totalVotes = $result->count();
+            $optionCounts = [];
+            foreach ($poll->poll_option as $option) {
+                $count = $result->where('option', $option)->count();
+                $percentage = $totalVotes > 0 ? round(($count / $totalVotes) * 100, 2) : 0;
+                $optionCounts[] = [
+                    'option' => $option,
+                    'count' => $count,
+                    'percentage' => $percentage
+                ];
+            }
+            return view('poll.results', [
+                'poll' => $poll,
+                'optionCounts' => $optionCounts,
+                'totalVotes' => $totalVotes
+            ]);
         }
 
-        return view('poll.results', [
-            'poll' => $poll,
-            'optionCounts' => $optionCounts,
-            'totalVotes' => $totalVotes
-        ]);
+        return back();
     }
 }

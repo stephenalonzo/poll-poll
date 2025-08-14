@@ -31,8 +31,10 @@
                         <button type="submit" class="w-full btn btn-primary">
                             Submit Vote
                         </button>
-                        <a href="/poll/{{ $poll->poll_uid }}/results" class="text-sm font-medium text-primary">View
-                            Results</a>
+                        @if ($poll->poll_resultsVisibility == 1)
+                            <a href="/poll/{{ $poll->poll_uid }}/results" class="text-sm font-medium text-primary">View
+                                Results</a>
+                        @endif
                     </div>
                 </form>
             </div>

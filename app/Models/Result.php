@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Requests\ResultRequest;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,7 +12,8 @@ class Result extends Model
 
     protected $fillable = [
         'poll_id',
-        'option'
+        'option',
+        'voter_ip',
     ];
 
     public function polls()
