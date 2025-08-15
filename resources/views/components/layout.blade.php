@@ -1,3 +1,3 @@
 <x-header></x-header>
-<main>{{ $slot }}</main>
+<main class="w-full">{{ $slot }}</main>
 <x-footer></x-footer>

@@ -31,7 +31,7 @@
                 <div id="default-navbar-collapse"
                     class="md:navbar-end collapse hidden grow basis-full overflow-hidden transition-[height] duration-300 max-md:w-full">
                     <ul class="menu md:menu-horizontal gap-2 p-0 text-base max-md:mt-2">
-                        <li><a href="#">Create a Poll</a></li>
+                        <li><a href="/">Create a Poll</a></li>
                     </ul>
                 </div>
             </div>

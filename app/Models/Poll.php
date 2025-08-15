@@ -12,6 +12,7 @@ class Poll extends Model
         'poll_uid',
         'poll_question',
         'poll_option',
+        'poll_votePerIP',
         'poll_multipleOptions',
         'poll_resultsVisibility'
     ];

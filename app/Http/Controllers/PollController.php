@@ -18,16 +18,17 @@ class PollController extends Controller
 
     public function show(Poll $poll)
     {
+        $ipCount = Result::where('poll_id', $poll->id)->where('voter_ip', $_SERVER['REMOTE_ADDR'])->count();
+
         return view('poll.show', [
-            'poll' => $poll
+            'poll' => $poll,
+            'ipCount' => $ipCount
         ]);
     }
 
     public function store(PollRequest $request)
     {
         $validated = $request->validated();
-
-        // dd($validated);
         $validated['poll_uid'] = bin2hex(random_bytes(4));
         Poll::create($validated);
 
@@ -67,6 +68,7 @@ class PollController extends Controller
                     'percentage' => $percentage
                 ];
             }
+
             return view('poll.results', [
                 'poll' => $poll,
                 'optionCounts' => $optionCounts,

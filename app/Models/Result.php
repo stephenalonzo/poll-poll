@@ -16,6 +16,10 @@ class Result extends Model
         'voter_ip',
     ];
 
+    protected $casts = [
+        'option' => 'array'
+    ];
+
     public function polls()
     {
         return $this->belongsToMany(Poll::class);

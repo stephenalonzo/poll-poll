@@ -1,7 +1,7 @@
 <x-layout>
     <section class="p-6">
         <div class="mx-auto flex items-center justify-center">
-            <div class="text-center">
+            <div class="text-center space-y-4">
                 <h3 class="font-bold text-3xl">Create a Poll</h3>
                 <p class="mb-4">
                     Complete the fields below to create your poll.
@@ -10,8 +10,8 @@
                     @csrf
                     <div class="w-96 text-start">
                         <label class="label-text" for="question">Title</label>
-                        <input type="text" name="poll_question" placeholder="Type your question here" class="input"
-                            id="question" />
+                        <input type="text" name="poll_question" placeholder="Type your question here"
+                            class="input border-gray-300" id="question" required />
                     </div>
                     <div class="space-y-2">
                         <p class="label-text text-start" for="content-remove-for-copy-target">Answer
@@ -19,7 +19,7 @@
                         <div id="wrapper-remove-for-copy-target" class="w-96 space-y-3">
                             <div class="text-start">
                                 <div id="content-remove-for-copy-target" class="text-start flex items-end space-x-4">
-                                    <input type="text" placeholder="Type option here" class="input"
+                                    <input type="text" placeholder="Type option here" class="input border-gray-300"
                                         name="poll_option[]" />
                                     <button class="btn btn-square btn-outline btn-error" aria-label="delete button"
                                         data-copy-markup-delete-item>
@@ -52,8 +52,13 @@
                     </div>
                     <div class="flex items-center justify-between gap-1">
                         <label class="label-text text-base" for="resultsVisiblity">Public results</label>
-                        <input type="checkbox" name="poll_resultsVisiblity" value="1" class="switch switch-primary"
-                            id="resultsVisiblity" />
+                        <input type="checkbox" name="poll_resultsVisibility" value="1"
+                            class="switch switch-primary" id="resultsVisiblity" />
+                    </div>
+                    <div class="flex items-center justify-between gap-1">
+                        <label class="label-text text-base" for="votePerIP">One vote per IP-Address</label>
+                        <input type="checkbox" name="poll_votePerIP" value="1" class="switch switch-primary"
+                            id="votePerIP" />
                     </div>
                     <hr class="opacity-25">
                     <button type="submit" class="w-full btn btn-primary">
@@ -64,3 +69,14 @@
         </div>
     </section>
 </x-layout>
+<script>
+    document.querySelector('form').addEventListener('submit', function(e) {
+        const firstInput = document.querySelector(
+            '#wrapper-remove-for-copy-target input[name="poll_option[]"]');
+
+        if (!firstInput || firstInput.value.trim() === '') {
+            e.preventDefault();
+            alert('Please fill in the first poll option before submitting.');
+        }
+    })
+</script>

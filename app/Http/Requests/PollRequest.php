@@ -24,8 +24,9 @@ class PollRequest extends FormRequest
         return [
             'poll_question' => 'required',
             'poll_option' => ['required', 'array'],
+            'poll_votePerIP' => 'nullable',
             'poll_multipleOptions' => 'nullable',
-            'poll_resultsVisiblity' => 'nullable',
+            'poll_resultsVisibility' => 'nullable',
         ];
     }
 }

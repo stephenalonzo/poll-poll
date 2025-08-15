@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('poll_uid');
             $table->string('poll_question');
             $table->string('poll_option');
+            $table->string('poll_votePerIP')->nullable();
             $table->string('poll_multipleOptions')->nullable();
             $table->string('poll_resultsVisibility')->nullable();
             $table->timestamps();
